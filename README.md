@@ -1,1 +1,2 @@
-# mobile device programming intorduction (university course)
+# mobile device programming intorduction
+university course
