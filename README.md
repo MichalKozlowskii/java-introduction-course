@@ -1,2 +1,2 @@
-# mobile device programming intorduction
+# mobile device programming in java intorduction
 university course
