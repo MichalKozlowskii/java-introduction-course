@@ -1,34 +1,27 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static List<List<String>> srt(List<String> lst) {
-        Collections.sort(lst);
+        return lst.stream()
+                .sorted()
+                .collect(Collectors.groupingBy(
+                        s -> String.valueOf(s.charAt(0)),
+                        TreeMap::new,
+                        Collectors.toList()
+                ))
+                .entrySet().stream()
+                .map(entry -> {
+                    List<String> filteredValues = entry.getValue().stream()
+                            .filter(s -> s.length() % 2 == 0)
+                            .toList();
 
-        Map<Character, List<String>> wordsMap = new HashMap<>();
-        List<String> currList = new ArrayList<>();
-
-        for (String word : lst) {
-            char firstLetter = word.charAt(0);
-
-            if (!wordsMap.containsKey(firstLetter)) {
-                currList = new ArrayList<>();
-                wordsMap.put(firstLetter, currList);
-            }
-
-            if (word.length() % 2 == 0) {
-                currList.add(word);
-                wordsMap.put(firstLetter, currList);
-            }
-        }
-
-        List<List<String>> result = new ArrayList<>();
-
-        for (Map.Entry<Character, List<String>> entry : wordsMap.entrySet()) {
-            List<String> innerResultList = List.of(String.valueOf(entry.getKey()), entry.getValue().toString());
-            result.add(innerResultList);
-        }
-
-        return result;
+                    List<String> innerList = new ArrayList<>();
+                    innerList.add(entry.getKey());
+                    innerList.addAll(filteredValues);
+                    return innerList;
+                })
+                .toList();
     }
 
     public static void main(String[] args) {
