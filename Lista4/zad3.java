@@ -1,18 +1,18 @@
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
-    public static Map<String, Integer> countElements(List<List<String>> lst) {
-        Map<String, Integer> result = new HashMap<>();
-
-        for (List<String> innerList : lst) {
-            for (String element : innerList) {
-                result.put(element, result.getOrDefault(element, 0) + 1);
-            }
-        }
-
-        return result;
+    public static Map<String, Integer> countElements(List<List<String>> inputList) {
+        return inputList.stream()
+                .flatMap(List::stream)
+                .collect(Collectors.groupingBy(
+                        e -> e,
+                        HashMap::new,
+                        Collectors.summingInt(e -> 1)
+                ));
     }
 
     public static void main(String[] args) {
