@@ -57,7 +57,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int num = 100000;
+        int num = 1000;
         Pair<Integer, Integer> output = findNumberWithMostDivisors(num);
         System.out.println("For the range <1," + num +">:");
 
