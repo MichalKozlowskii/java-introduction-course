@@ -8,8 +8,7 @@ import static java.math.MathContext.DECIMAL128;
 
 public class Main {
 
-    public static BigDecimal calculateEuler() {
-        int numberOfThreads = Runtime.getRuntime().availableProcessors();
+    public static BigDecimal calculateEuler(int numberOfThreads) {
         ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
 
         try {
@@ -52,6 +51,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        System.out.println(calculateEuler());
+        System.out.println(calculateEuler(17));
     }
 }
