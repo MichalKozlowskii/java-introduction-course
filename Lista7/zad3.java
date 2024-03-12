@@ -13,7 +13,9 @@ public class Main {
             throw new IllegalArgumentException("The number must be in the range <1, 100000>");
         }
 
-        ExecutorService executor = Executors.newFixedThreadPool(num);
+
+        int processors = Runtime.getRuntime().availableProcessors();
+        ExecutorService executor = Executors.newFixedThreadPool(processors);
 
         try {
             Future<Pair<Integer, Integer>>[] subtaskResults = new Future[num];
@@ -47,17 +49,17 @@ public class Main {
 
     public static Pair<Integer, Integer> getDivisorsAmount(int num) {
         int divisorsAmount = 0 ;
-        for (int i = 1; i <= num; i++) {
+        for (int i = 1; i <= num / 2; i++) {
             if (num % i == 0) {
                 divisorsAmount++;
             }
         }
 
-        return new Pair<>(num, divisorsAmount);
+        return new Pair<>(num, divisorsAmount + 1);
     }
 
     public static void main(String[] args) {
-        int num = 1000;
+        int num = 100000;
         Pair<Integer, Integer> output = findNumberWithMostDivisors(num);
         System.out.println("For the range <1," + num +">:");
 
