@@ -11,7 +11,8 @@ public class Main {
             throw new IllegalArgumentException("Factorial is not defined for negative numbers.");
         }
 
-        ExecutorService executor = Executors.newFixedThreadPool(n);
+        int processors = Runtime.getRuntime().availableProcessors();
+        ExecutorService executor = Executors.newFixedThreadPool(processors);
 
         try {
             Future<BigInteger>[] subtaskResults = new Future[n];

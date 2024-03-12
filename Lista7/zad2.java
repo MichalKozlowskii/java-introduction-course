@@ -8,13 +8,14 @@ import static java.math.MathContext.DECIMAL128;
 
 public class Main {
 
-    public static BigDecimal calculateEuler(int numberOfThreads) {
-        ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
+    public static BigDecimal calculateEuler(int num) {
+        int processors = Runtime.getRuntime().availableProcessors();
+        ExecutorService executor = Executors.newFixedThreadPool(processors);
 
         try {
-            Future<BigDecimal>[] subtaskResults = new Future[numberOfThreads];
+            Future<BigDecimal>[] subtaskResults = new Future[num];
 
-            for (int i = 0; i < numberOfThreads; i++) {
+            for (int i = 0; i < num; i++) {
                 final int subtaskNumber = i;
                 subtaskResults[i] = executor.submit(new Callable<BigDecimal>() {
                     @Override
